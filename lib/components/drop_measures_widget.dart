@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class DropMeasuresWidget extends StatefulWidget {
   final List<String> measures;
-  const DropMeasuresWidget({super.key, required this.measures});
+  final TextEditingController controller;
+  const DropMeasuresWidget({super.key, required this.measures, required this.controller});
 
   @override
   State<DropMeasuresWidget> createState() => _DropMeasuresWidgetState();
@@ -34,6 +35,7 @@ class _DropMeasuresWidgetState extends State<DropMeasuresWidget> {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 3.0),
               child: TextField(
+                controller: widget.controller,
                 style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.05,
                     fontWeight: FontWeight.bold,
