@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DropMeasuresWidget extends StatefulWidget {
   final List<String> measures;
   final TextEditingController controller;
   final Color colortype;
-  const DropMeasuresWidget({super.key, required this.measures, required this.controller, required this.colortype});
+  const DropMeasuresWidget(
+      {super.key,
+      required this.measures,
+      required this.controller,
+      required this.colortype});
 
   @override
   State<DropMeasuresWidget> createState() => _DropMeasuresWidgetState();
@@ -23,9 +28,9 @@ class _DropMeasuresWidgetState extends State<DropMeasuresWidget> {
     return Container(
       height: MediaQuery.sizeOf(context).height * 0.06,
       width: MediaQuery.sizeOf(context).width * 0.4,
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
           color: widget.colortype,
-          borderRadius: BorderRadius.all(Radius.circular(20))),
+          borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,6 +41,7 @@ class _DropMeasuresWidgetState extends State<DropMeasuresWidget> {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 3.0),
               child: TextField(
+                inputFormatters: [LengthLimitingTextInputFormatter(4)],
                 controller: widget.controller,
                 style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.05,
@@ -51,7 +57,7 @@ class _DropMeasuresWidgetState extends State<DropMeasuresWidget> {
           DropdownButton(
             value: dropDowValue,
             elevation: 2,
-            dropdownColor: Colors.orangeAccent,
+            dropdownColor: widget.colortype,
             isDense: true,
             items: widget.measures
                 .map<DropdownMenuItem<String>>(

@@ -1,11 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:imc_app_cal/components/age_imput_widget.dart';
 import 'package:imc_app_cal/components/card_info_imc.dart';
+import 'package:imc_app_cal/components/custom_butoom.dart';
 import 'package:imc_app_cal/components/state_imc_model_widget.dart';
 import 'package:imc_app_cal/components/tougle_gender_widget.dart';
 import 'package:imc_app_cal/pages/home_view_model.dart';
-
 import '../../components/drop_measures_widget.dart';
+import '../../src/enum_state_calc.dart';
 import '../../src/enum_state_imc.dart';
 
 class HomeView extends HomeViewModel {
@@ -21,7 +24,7 @@ class HomeView extends HomeViewModel {
               Container(
                   height: MediaQuery.sizeOf(context).height * 0.3,
                   width: MediaQuery.sizeOf(context).width,
-                  decoration:  BoxDecoration(
+                  decoration: BoxDecoration(
                       color: imcprimaryColor,
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(20),
@@ -44,9 +47,13 @@ class HomeView extends HomeViewModel {
                                       MediaQuery.sizeOf(context).width * 0.07),
                             ),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  reflashState();
+                                },
                                 icon: Icon(
-                                  Icons.list_alt_rounded,
+                                  resulImc != ""
+                                      ? Icons.refresh
+                                      : Icons.list_alt_rounded,
                                   color: Colors.white,
                                   size:
                                       MediaQuery.of(context).size.width * 0.08,
@@ -79,52 +86,76 @@ class HomeView extends HomeViewModel {
                               icons: gendertype,
                               togleSelect: togleSelect,
                             ),
-                            AgeImputWidget(controller: age,secundarycolor: imcsecundaryColor,)
+                            AgeImputWidget(
+                              controller: age,
+                              secundarycolor: imcsecundaryColor,
+                            )
                           ],
                         )
                       ],
                     ),
                   )),
-              Container(
-                height: MediaQuery.sizeOf(context).height * 0.6,
-                width: MediaQuery.sizeOf(context).width,
-                child: Column(
-                  children: [
-                    CardInfoImc(imcDif: diflImc,imcvalue: resulImc,noticestate:noticelImc, imccolor: imcprimaryColor,),
-                    SizedBox(
-                      height: MediaQuery.sizeOf(context).height * 0.35,
-                      width: MediaQuery.sizeOf(context).width,
-                      child: Column(
-                        children: EnumStateimac.values.map((EnumStateimac type) => StateImcModelWidget(statusimc: type.status, minvalue: type.minvalue.toString(), maxvalue: type.maxvalue.toString(), statuscolor: type.primary,isselect: type.status == stateImc,)).toList()
-                      ),
-                    )
-                  ],
-                ),
+              AnimatedSize(
+                duration: const Duration(seconds: 1),
+                curve: Curves.fastOutSlowIn,
+                child: iscalculated
+                    ? FutureBuilder(
+                        future: Future.delayed(Duration(microseconds: 1)),
+                        builder: (context, _) {
+
+                          switch (stateload) {
+                            case Satecalc.await:
+                              return SizedBox(
+                                height: MediaQuery.sizeOf(context).height * 0.4,
+                              );
+                            case Satecalc.loading:
+                              return SizedBox(
+                                height: MediaQuery.sizeOf(context).height * 0.4,
+                                width: MediaQuery.sizeOf(context).width,
+                                child: Center(child: CircularProgressIndicator(
+                                  color: imcprimaryColor,
+                                )),
+                              );
+                            case Satecalc.finishin:
+                              return Column(
+                                children: [
+                                  CardInfoImc(
+                                    imcDif: diflImc,
+                                    imcvalue: resulImc,
+                                    noticestate: noticelImc,
+                                    imccolor: imcprimaryColor,
+                                  ),
+                                  SizedBox(
+                                    height: MediaQuery.sizeOf(context).height *
+                                        0.35,
+                                    width: MediaQuery.sizeOf(context).width,
+                                    child: Column(
+                                        children: EnumStateimac.values
+                                            .map((EnumStateimac type) =>
+                                                StateImcModelWidget(
+                                                  statusimc: type.status,
+                                                  minvalue:
+                                                      type.minvalue.toString(),
+                                                  maxvalue:
+                                                      type.maxvalue.toString(),
+                                                  statuscolor: type.primary,
+                                                  isselect:
+                                                      type.status == stateImc,
+                                                ))
+                                            .toList()),
+                                  )
+                                ],
+                              );
+                          }
+                        },
+                      )
+                    : SizedBox(height: MediaQuery.sizeOf(context).height * 0.4),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: MediaQuery.of(context).size.height * 0.08,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(imcprimaryColor),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12)))),
-                      onPressed: () {
-                        if (width.text != "" && heith.text != "") {
-                          setStateImc(width: double.parse(width.text), heith: double.parse(heith.text));
-                        }
-                      },
-                      child: const Text(
-                        "Calcular IMC",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      )),
-                ),
-              )
+              CustomButoom(
+                  ontap: () {
+                    calcimc();
+                  },
+                  backgroundColor: imcprimaryColor)
             ],
           ),
         ),
