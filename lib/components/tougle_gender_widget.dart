@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TougleGenderWidget extends StatefulWidget {
-  const TougleGenderWidget({super.key, required this.togleSelect, required this.icons});
+  const TougleGenderWidget({super.key, required this.togleSelect, required this.icons, required this.primary, required this.secundary});
   final List<bool> togleSelect;
   final List<Widget> icons;
+  final Color primary;
+  final Color secundary;
 
   @override
   State<TougleGenderWidget> createState() => _TougleGenderWidgetState();
@@ -30,9 +32,9 @@ class _TougleGenderWidgetState extends State<TougleGenderWidget> {
       borderRadius: const BorderRadius.all(Radius.circular(20)),
       fillColor: Colors.white,
       borderColor: Colors.white,
-      splashColor: Colors.orangeAccent,
+      splashColor: widget.primary,
       selectedBorderColor: Colors.white,
-      selectedColor: Colors.orange,
+      selectedColor: widget.secundary,
       color: Colors.white60,
       children: widget.icons,
     );

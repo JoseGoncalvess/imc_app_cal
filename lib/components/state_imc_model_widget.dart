@@ -5,11 +5,12 @@ class StateImcModelWidget extends StatelessWidget {
       {super.key,
       required this.statusimc,
       required this.minvalue,
-      required this.maxvalue, required this.statuscolor});
+      required this.maxvalue, required this.statuscolor, required this.isselect});
   final String statusimc;
   final String minvalue;
   final String maxvalue;
   final Color statuscolor;
+  final bool isselect;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,7 @@ class StateImcModelWidget extends StatelessWidget {
         Icon(
           Icons.arrow_right_alt_rounded,
           size: MediaQuery.of(context).size.width * 0.1,
+          color:isselect? statuscolor: Colors.white,
         ),
         Icon(
           Icons.circle,

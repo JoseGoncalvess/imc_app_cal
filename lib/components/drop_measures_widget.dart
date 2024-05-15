@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class DropMeasuresWidget extends StatefulWidget {
   final List<String> measures;
   final TextEditingController controller;
-  const DropMeasuresWidget({super.key, required this.measures, required this.controller});
+  final Color colortype;
+  const DropMeasuresWidget({super.key, required this.measures, required this.controller, required this.colortype});
 
   @override
   State<DropMeasuresWidget> createState() => _DropMeasuresWidgetState();
@@ -22,8 +23,8 @@ class _DropMeasuresWidgetState extends State<DropMeasuresWidget> {
     return Container(
       height: MediaQuery.sizeOf(context).height * 0.06,
       width: MediaQuery.sizeOf(context).width * 0.4,
-      decoration: const BoxDecoration(
-          color: Colors.orangeAccent,
+      decoration:  BoxDecoration(
+          color: widget.colortype,
           borderRadius: BorderRadius.all(Radius.circular(20))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

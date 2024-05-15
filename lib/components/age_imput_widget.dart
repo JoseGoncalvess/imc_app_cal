@@ -3,8 +3,9 @@ import 'package:flutter/services.dart';
 
 class AgeImputWidget extends StatefulWidget {
   final TextEditingController controller;
+  final Color secundarycolor;
 
-  const AgeImputWidget({super.key, required this.controller});
+  const AgeImputWidget({super.key, required this.controller, required this.secundarycolor});
 
   @override
   State<AgeImputWidget> createState() => _AgeImputWidgetState();
@@ -16,8 +17,8 @@ class _AgeImputWidgetState extends State<AgeImputWidget> {
     return Container(
       height: MediaQuery.sizeOf(context).height * 0.06,
       width: MediaQuery.sizeOf(context).width * 0.4,
-      decoration: const BoxDecoration(
-          color: Colors.orangeAccent,
+      decoration:  BoxDecoration(
+          color: widget.secundarycolor,
           borderRadius: BorderRadius.all(Radius.circular(20))),
       child: TextField(
         inputFormatters: [LengthLimitingTextInputFormatter(3)],

@@ -21,9 +21,9 @@ class HomeView extends HomeViewModel {
               Container(
                   height: MediaQuery.sizeOf(context).height * 0.3,
                   width: MediaQuery.sizeOf(context).width,
-                  decoration: const BoxDecoration(
-                      color: Colors.orange,
-                      borderRadius: BorderRadius.only(
+                  decoration:  BoxDecoration(
+                      color: imcprimaryColor,
+                      borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(20),
                           bottomRight: Radius.circular(20))),
                   child: Padding(
@@ -58,10 +58,12 @@ class HomeView extends HomeViewModel {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             DropMeasuresWidget(
+                              colortype: imcsecundaryColor,
                               measures: tamanho,
                               controller: heith,
                             ),
                             DropMeasuresWidget(
+                              colortype: imcsecundaryColor,
                               measures: pesos,
                               controller: width,
                             ),
@@ -72,10 +74,12 @@ class HomeView extends HomeViewModel {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             TougleGenderWidget(
+                              primary: imcprimaryColor,
+                              secundary: imcsecundaryColor,
                               icons: gendertype,
                               togleSelect: togleSelect,
                             ),
-                            AgeImputWidget(controller: age)
+                            AgeImputWidget(controller: age,secundarycolor: imcsecundaryColor,)
                           ],
                         )
                       ],
@@ -84,15 +88,14 @@ class HomeView extends HomeViewModel {
               Container(
                 height: MediaQuery.sizeOf(context).height * 0.6,
                 width: MediaQuery.sizeOf(context).width,
-                decoration: BoxDecoration(),
                 child: Column(
                   children: [
-                    CardInfoImc(imcDif: "0",imcvalue: resulImc),
-                    Container(
+                    CardInfoImc(imcDif: diflImc,imcvalue: resulImc,noticestate:noticelImc, imccolor: imcprimaryColor,),
+                    SizedBox(
                       height: MediaQuery.sizeOf(context).height * 0.35,
                       width: MediaQuery.sizeOf(context).width,
                       child: Column(
-                        children: Stateimac.values.map((Stateimac type) => StateImcModelWidget(statusimc: type.status, minvalue: type.minvalue.toString(), maxvalue: type.maxvalue.toString(), statuscolor: type.color,)).toList() ,
+                        children: EnumStateimac.values.map((EnumStateimac type) => StateImcModelWidget(statusimc: type.status, minvalue: type.minvalue.toString(), maxvalue: type.maxvalue.toString(), statuscolor: type.primary,isselect: type.status == stateImc,)).toList()
                       ),
                     )
                   ],
@@ -106,7 +109,7 @@ class HomeView extends HomeViewModel {
                   child: ElevatedButton(
                       style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(Colors.orange),
+                              MaterialStateProperty.all(imcprimaryColor),
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12)))),

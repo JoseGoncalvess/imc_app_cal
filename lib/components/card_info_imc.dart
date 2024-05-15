@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CardInfoImc extends StatefulWidget {
-  const CardInfoImc({super.key, required this.imcvalue, required this.imcDif,});
+  const CardInfoImc({super.key, required this.imcvalue, required this.imcDif, required this.noticestate, required this.imccolor,});
 final String imcvalue;
 final String imcDif;
+final String noticestate; 
+final Color imccolor;
   @override
   State<CardInfoImc> createState() => _CardInfoImcState();
 }
@@ -11,7 +13,7 @@ final String imcDif;
 class _CardInfoImcState extends State<CardInfoImc> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.25,
       width: MediaQuery.sizeOf(context).width,
       child: Column(
@@ -36,16 +38,16 @@ class _CardInfoImcState extends State<CardInfoImc> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Abaixo do Peso: ",
+                "${widget.noticestate} ",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                     fontSize: MediaQuery.of(context).size.width * 0.07),
               ),
-              Text("-4.5 kg",
+              Text(widget.imcDif == "0.0" ?"": "${widget.imcDif} kg",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.orange,
+                      color: widget.imccolor,
                       fontSize: MediaQuery.of(context).size.width * 0.07))
             ],
           ),
