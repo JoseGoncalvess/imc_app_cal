@@ -8,6 +8,7 @@ import 'package:imc_app_cal/components/state_imc_model_widget.dart';
 import 'package:imc_app_cal/components/tougle_gender_widget.dart';
 import 'package:imc_app_cal/pages/home_view_model.dart';
 import '../../components/drop_measures_widget.dart';
+import '../../src/enum_measures.dart';
 import '../../src/enum_state_calc.dart';
 import '../../src/enum_state_imc.dart';
 
@@ -66,12 +67,16 @@ class HomeView extends HomeViewModel {
                           children: [
                             DropMeasuresWidget(
                               colortype: imcsecundaryColor,
-                              measures: tamanho,
+                              measures: Measuresheight.values
+                                  .map((e) => e.name)
+                                  .toList(),
                               controller: heith,
                             ),
                             DropMeasuresWidget(
                               colortype: imcsecundaryColor,
-                              measures: pesos,
+                              measures: Measureswidth.values
+                                  .map((e) => e.name)
+                                  .toList(),
                               controller: width,
                             ),
                           ],
@@ -102,7 +107,6 @@ class HomeView extends HomeViewModel {
                     ? FutureBuilder(
                         future: Future.delayed(Duration(microseconds: 1)),
                         builder: (context, _) {
-
                           switch (stateload) {
                             case Satecalc.await:
                               return SizedBox(
@@ -112,7 +116,8 @@ class HomeView extends HomeViewModel {
                               return SizedBox(
                                 height: MediaQuery.sizeOf(context).height * 0.4,
                                 width: MediaQuery.sizeOf(context).width,
-                                child: Center(child: CircularProgressIndicator(
+                                child: Center(
+                                    child: CircularProgressIndicator(
                                   color: imcprimaryColor,
                                 )),
                               );
@@ -152,8 +157,9 @@ class HomeView extends HomeViewModel {
                     : SizedBox(height: MediaQuery.sizeOf(context).height * 0.4),
               ),
               CustomButoom(
+                actiontext:iscalculated?"Salvar Calculo" :"Cálcular IMC",
                   ontap: () {
-                    calcimc();
+                    iscalculated ? () {} : calcimc();
                   },
                   backgroundColor: imcprimaryColor)
             ],

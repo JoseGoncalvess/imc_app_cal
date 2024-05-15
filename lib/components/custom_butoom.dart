@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class CustomButoom extends StatelessWidget {
   final Function() ontap;
   final Color backgroundColor;
+  final String actiontext;
   const CustomButoom(
-      {super.key, required this.ontap, required this.backgroundColor});
+      {super.key, required this.ontap, required this.backgroundColor, required this.actiontext});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +22,8 @@ class CustomButoom extends StatelessWidget {
             onPressed: () {
               ontap();
             },
-            child: const Text(
-              "Calcular IMC",
+            child:  Text(
+             actiontext,
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             )),

@@ -131,10 +131,11 @@ abstract class HomeViewModel extends State<Home> {
 
   calcimc() {
     if (width.text != "" && heith.text != "") {
+      
       setStateImc(
           width: double.parse(width.text), heith: double.parse(heith.text));
     } else {
-      
+
     }
   }
 }
