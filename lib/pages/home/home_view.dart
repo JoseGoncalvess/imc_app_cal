@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:imc_app_cal/components/age_imput_widget.dart';
+import 'package:imc_app_cal/components/card_info_imc.dart';
+import 'package:imc_app_cal/components/state_imc_model_widget.dart';
+import 'package:imc_app_cal/components/tougle_gender_widget.dart';
 import 'package:imc_app_cal/pages/home_view_model.dart';
 
 import '../../components/drop_measures_widget.dart';
+import '../../src/enum_state_imc.dart';
 
 class HomeView extends HomeViewModel {
   @override
@@ -26,41 +31,51 @@ class HomeView extends HomeViewModel {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
-                          "Calculadora de IMC",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: MediaQuery.sizeOf(context).width * 0.07),
-                        ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            DropMeasuresWidget(measures: tamanho,),
-                            DropMeasuresWidget(measures: pesos,),
-                          
+                            Text(
+                              "Calculadora de IMC",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize:
+                                      MediaQuery.sizeOf(context).width * 0.07),
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.list_alt_rounded,
+                                  color: Colors.white,
+                                  size:
+                                      MediaQuery.of(context).size.width * 0.08,
+                                ))
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              height: MediaQuery.sizeOf(context).height * 0.06,
-                              width: MediaQuery.sizeOf(context).width * 0.4,
-                              decoration: const BoxDecoration(
-                                  color: Colors.grey,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
+                            DropMeasuresWidget(
+                              measures: tamanho,
+                              controller: heith,
                             ),
-                            Container(
-                              height: MediaQuery.sizeOf(context).height * 0.06,
-                              width: MediaQuery.sizeOf(context).width * 0.4,
-                              decoration: const BoxDecoration(
-                                  color: Colors.grey,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
-                            )
+                            DropMeasuresWidget(
+                              measures: pesos,
+                              controller: width,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            TougleGenderWidget(
+                              icons: gendertype,
+                              togleSelect: togleSelect,
+                            ),
+                            AgeImputWidget(controller: age)
                           ],
                         )
                       ],
@@ -69,8 +84,18 @@ class HomeView extends HomeViewModel {
               Container(
                 height: MediaQuery.sizeOf(context).height * 0.6,
                 width: MediaQuery.sizeOf(context).width,
-                decoration: BoxDecoration(
-                  color: Colors.red,
+                decoration: BoxDecoration(),
+                child: Column(
+                  children: [
+                    CardInfoImc(imcDif: "0",imcvalue: resulImc),
+                    Container(
+                      height: MediaQuery.sizeOf(context).height * 0.35,
+                      width: MediaQuery.sizeOf(context).width,
+                      child: Column(
+                        children: Stateimac.values.map((Stateimac type) => StateImcModelWidget(statusimc: type.status, minvalue: type.minvalue.toString(), maxvalue: type.maxvalue.toString(), statuscolor: type.color,)).toList() ,
+                      ),
+                    )
+                  ],
                 ),
               ),
               Container(
@@ -80,10 +105,21 @@ class HomeView extends HomeViewModel {
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: ElevatedButton(
                       style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)))),
-                      onPressed: () {},
-                      child: Text("Calcular")),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.orange),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)))),
+                      onPressed: () {
+                        if (width.text != "" && heith.text != "") {
+                          setStateImc(width: double.parse(width.text), heith: double.parse(heith.text));
+                        }
+                      },
+                      child: const Text(
+                        "Calcular IMC",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      )),
                 ),
               )
             ],
