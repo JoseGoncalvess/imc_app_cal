@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:imc_app_cal/components/age_imput_widget.dart';
 import 'package:imc_app_cal/components/card_info_imc.dart';
@@ -167,18 +169,12 @@ class HomeView extends HomeViewModel {
               CustomButoom(
                   actiontext: iscalculated ? "Salvar Calculo" : "Cálcular IMC",
                   ontap: () {
-                    saveHistoric(
-                        name: "Bruno",
-                        age: 22.0,
-                        width: 84,
-                        heith: 190,
-                        imc: 25.8,
-                        statusimc: "Normal");
-                    // if (iscalculated) {
-                    //   savetocalc();
-                    // } else {
-                    //   calcimc();
-                    // }
+                    // log(imcprimaryColor.value.toString());
+                    if (iscalculated) {
+                      savetocalc();
+                    } else {
+                      calcimc();
+                    }
                   },
                   backgroundColor: imcprimaryColor)
             ],

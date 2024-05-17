@@ -21,7 +21,7 @@ class _CustomHistoricListState extends State<CustomHistoricList> {
         child: Container(
           height: MediaQuery.sizeOf(context).height * 0.15,
           decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [Colors.redAccent ,Colors.green]),
+              gradient: LinearGradient(colors: [widget.list[index].primarycolorsstate, widget.list[index].secundarycolorsstate]),
               borderRadius: BorderRadius.circular(15),
               boxShadow: const [
                 BoxShadow(color: Colors.grey, blurRadius: 2, spreadRadius: 1)

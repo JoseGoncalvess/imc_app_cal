@@ -1,5 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:imc_app_cal/helpers/month_name.dart';
+
 part 'historic_model.g.dart';
 
 @HiveType(typeId: 0)
@@ -16,8 +18,12 @@ class HistoricModel extends HiveObject {
   final double width;
   @HiveField(5)
   final double heith;
-    @HiveField(6)
+  @HiveField(6)
   final double imc;
+  @HiveField(7)
+  final Color primarycolorsstate;
+   @HiveField(8)
+  final Color secundarycolorsstate;
   HistoricModel({
     required this.name,
     required this.date,
@@ -26,6 +32,9 @@ class HistoricModel extends HiveObject {
     required this.width,
     required this.heith,
     required this.imc,
+    required this.primarycolorsstate,
+    required this.secundarycolorsstate,
   });
+  
 
 }

@@ -6,9 +6,8 @@ import '../../src/enum_state_calc.dart';
 import '../../src/enum_state_imc.dart';
 
 abstract class HomeViewModel extends State<Home> {
-  List<String> tamanho = ["cm", "m"];
-  List<String> pesos = ["kg", "g"];
   List<bool> togleSelect = [true, false];
+
   List<Widget> gendertype = [
     const Icon(Icons.man_2_rounded),
     const Icon(Icons.woman_2_rounded)
@@ -24,7 +23,6 @@ abstract class HomeViewModel extends State<Home> {
   final heith = TextEditingController();
   final width = TextEditingController();
   String gender = '';
-
   String stateImc = "";
   String resulImc = "";
   String noticelImc = "";
@@ -92,27 +90,27 @@ abstract class HomeViewModel extends State<Home> {
         state = EnumStateimac.mtBaixo.status;
         primary = EnumStateimac.mtBaixo.primary;
         secundary = EnumStateimac.mtBaixo.secundary;
-      case >= 17 && < 18.4:
+      case >= 17 && < 18.5:
         state = EnumStateimac.abaixo.status;
         primary = EnumStateimac.abaixo.primary;
         secundary = EnumStateimac.abaixo.secundary;
-      case >= 18.5 && < 24.9:
+      case >= 18.5 && < 25:
         state = EnumStateimac.normal.status;
         primary = EnumStateimac.normal.primary;
         secundary = EnumStateimac.normal.secundary;
-      case >= 25 && < 29.9:
+      case >= 25 && < 30:
         state = EnumStateimac.sobrepeso.status;
         primary = EnumStateimac.sobrepeso.primary;
         secundary = EnumStateimac.sobrepeso.secundary;
-      case >= 30 && < 34.9:
+      case >= 30 && < 35:
         state = EnumStateimac.obesidadeI.status;
         primary = EnumStateimac.obesidadeI.primary;
         secundary = EnumStateimac.obesidadeI.secundary;
-      case > 35 && <= 39.9:
+      case >= 35 && < 40:
         state = EnumStateimac.obesidadeII.status;
         primary = EnumStateimac.obesidadeII.primary;
         secundary = EnumStateimac.obesidadeII.secundary;
-      case > 40:
+      case >= 40:
         state = EnumStateimac.obesidademorb.status;
         primary = EnumStateimac.obesidademorb.primary;
         secundary = EnumStateimac.obesidademorb.secundary;
@@ -141,6 +139,8 @@ abstract class HomeViewModel extends State<Home> {
   savetocalc() {
     if (age.text != '' && gender != '') {
       saveHistoric(
+          primary: imcprimaryColor,
+          secundary: imcsecundaryColor,
           name: name.text,
           age: double.parse(age.text),
           width: double.parse(width.text),
@@ -158,9 +158,20 @@ abstract class HomeViewModel extends State<Home> {
       required double width,
       required double heith,
       required double imc,
-      required String statusimc}) async {
+      required String statusimc,
+      required Color primary,
+      required Color secundary}) async {
     HiveRepository repositorie = await HiveRepository.loadrepository();
 
-    repositorie.savehistoric(HistoricModel(name: name, date: DateTime.now(), statusimc: statusimc, age: age, width: width, heith: heith, imc: imc));
+    repositorie.savehistoric(HistoricModel(
+        name: name,
+        date: DateTime.now(),
+        statusimc: statusimc,
+        age: age,
+        width: width,
+        heith: heith,
+        imc: imc,
+        primarycolorsstate: primary,
+        secundarycolorsstate: secundary));
   }
 }

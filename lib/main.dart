@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:imc_app_cal/helpers/hive_structure.dart';
-import 'models/historic_model.dart';
+import 'package:imc_app_cal/models/historic_model.dart';
 import 'myapp.dart';
 
 void main() async {

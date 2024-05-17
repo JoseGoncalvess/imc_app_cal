@@ -15,7 +15,8 @@ class HistoricModelAdapter extends TypeAdapter<HistoricModel> {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
+    }; 
+    
     return HistoricModel(
       name: fields[0] as String,
       date: fields[1] as DateTime,
@@ -24,13 +25,15 @@ class HistoricModelAdapter extends TypeAdapter<HistoricModel> {
       width: fields[4] as double,
       heith: fields[5] as double,
       imc: fields[6] as double,
+      primarycolorsstate:  Color(reader.readUint32()),
+      secundarycolorsstate: Color(reader.readUint32()),
     );
   }
 
   @override
   void write(BinaryWriter writer, HistoricModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -44,7 +47,11 @@ class HistoricModelAdapter extends TypeAdapter<HistoricModel> {
       ..writeByte(5)
       ..write(obj.heith)
       ..writeByte(6)
-      ..write(obj.imc);
+      ..write(obj.imc)
+      ..writeUint32(7)
+      ..writeUint32(obj.primarycolorsstate.value)
+      ..writeUint32(8)
+      ..writeUint32(obj.secundarycolorsstate.value);
   }
 
   @override
