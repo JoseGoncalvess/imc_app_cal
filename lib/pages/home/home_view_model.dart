@@ -125,7 +125,6 @@ abstract class HomeViewModel extends State<Home> {
         imcsecundaryColor = secundary;
         stateload = Satecalc.finishin;
       });
-      ;
     });
   }
 
@@ -136,7 +135,7 @@ abstract class HomeViewModel extends State<Home> {
     } else {}
   }
 
-  savetocalc() {
+  Future savetocalc() async {
     if (age.text != '' && gender != '') {
       saveHistoric(
           primary: imcprimaryColor,

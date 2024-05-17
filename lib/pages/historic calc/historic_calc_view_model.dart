@@ -14,9 +14,14 @@ abstract class HistoricCalcViewModel extends State<HistoricCalc> {
     });
   }
 
+  delethistori(HistoricModel historic)async{
+        HiveRepository repositorie = await HiveRepository.loadrepository();
+        repositorie.delethistoric(historic);
+        loadhistoric();
+  }
+
 @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     loadhistoric();
   }

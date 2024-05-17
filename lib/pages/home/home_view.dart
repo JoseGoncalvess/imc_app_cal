@@ -1,12 +1,14 @@
-import 'dart:developer';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:imc_app_cal/components/age_imput_widget.dart';
 import 'package:imc_app_cal/components/card_info_imc.dart';
 import 'package:imc_app_cal/components/custom_butoom.dart';
 import 'package:imc_app_cal/components/state_imc_model_widget.dart';
 import 'package:imc_app_cal/components/tougle_gender_widget.dart';
 import 'package:imc_app_cal/pages/home/home_view_model.dart';
+import '../../components/custom_botooshet.dart';
 import '../../components/drop_measures_widget.dart';
 import '../../src/enum_measures.dart';
 import '../../src/enum_state_calc.dart';
@@ -167,11 +169,18 @@ class HomeView extends HomeViewModel {
                     : SizedBox(height: MediaQuery.sizeOf(context).height * 0.4),
               ),
               CustomButoom(
+                  textColor: Colors.white,
                   actiontext: iscalculated ? "Salvar Calculo" : "Cálcular IMC",
                   ontap: () {
-                    // log(imcprimaryColor.value.toString());
                     if (iscalculated) {
-                      savetocalc();
+                      showModalBottomSheet(
+                          backgroundColor: imcprimaryColor,
+                          context: context,
+                          builder: (context) => CustomBotooshet(
+                              textcolor: imcprimaryColor,
+                              controller: name,
+                              ontap: () => savetocalc()
+                                  .then((value) => Navigator.pop(context))));
                     } else {
                       calcimc();
                     }

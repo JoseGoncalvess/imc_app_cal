@@ -4,8 +4,9 @@ import 'package:imc_app_cal/helpers/month_name.dart';
 import '../models/historic_model.dart';
 
 class CustomHistoricList extends StatefulWidget {
-  const CustomHistoricList({super.key, required this.list,});
+  const CustomHistoricList({super.key, required this.list, required this.ontap,});
  final  List<HistoricModel> list;
+ final Function(HistoricModel historic) ontap;
 
   @override
   State<CustomHistoricList> createState() => _CustomHistoricListState();
@@ -75,7 +76,9 @@ class _CustomHistoricListState extends State<CustomHistoricList> {
                 ),
               ),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    widget.ontap(widget.list[index]);
+                  },
                   icon: const Icon(
                     Icons.edit_document,
                     color: Colors.white,

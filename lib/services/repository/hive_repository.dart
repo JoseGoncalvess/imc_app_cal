@@ -20,4 +20,7 @@ class HiveRepository {
   List<HistoricModel> loadhistoric() {
     return _box.values.cast<HistoricModel>().toList();
   }
+  void delethistoric(HistoricModel historic){
+    _box.delete(historic.key);
+  }
 }

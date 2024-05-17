@@ -16,7 +16,7 @@ class HistoricCalcView extends HistoricCalcViewModel {
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: CustomHistoricList(list: historic)
+          child: CustomHistoricList(list: historic,ontap: (historic) => delethistori(historic),)
         ));
   }
 }

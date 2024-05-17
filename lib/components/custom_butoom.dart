@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 class CustomButoom extends StatelessWidget {
   final Function() ontap;
   final Color backgroundColor;
+  final Color textColor;
   final String actiontext;
-  const CustomButoom(
-      {super.key, required this.ontap, required this.backgroundColor, required this.actiontext});
+   const CustomButoom(
+      {super.key, required this.ontap, required this.backgroundColor, required this.actiontext, required this.textColor,});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class CustomButoom extends StatelessWidget {
             child:  Text(
              actiontext,
               style:
-                  const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                   TextStyle(color: textColor, fontWeight: FontWeight.bold),
             )),
       ),
     );
