@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:imc_app_cal/pages/home/home.dart';
-import '../src/enum_state_calc.dart';
-import '../src/enum_state_imc.dart';
+import '../../models/historic_model.dart';
+import '../../services/repository/hive_repository.dart';
+import '../../src/enum_state_calc.dart';
+import '../../src/enum_state_imc.dart';
 
 abstract class HomeViewModel extends State<Home> {
   List<String> tamanho = ["cm", "m"];
@@ -21,6 +23,7 @@ abstract class HomeViewModel extends State<Home> {
   final age = TextEditingController();
   final heith = TextEditingController();
   final width = TextEditingController();
+  String gender = '';
 
   String stateImc = "";
   String resulImc = "";
@@ -33,6 +36,7 @@ abstract class HomeViewModel extends State<Home> {
       resulImc = "";
       noticelImc = "";
       diflImc = "";
+      gender = "";
       imcprimaryColor = Colors.deepPurple;
       imcsecundaryColor = Colors.deepPurple.shade400;
       stateload = Satecalc.await;
@@ -80,6 +84,7 @@ abstract class HomeViewModel extends State<Home> {
 
     setState(() {
       stateload = Satecalc.loading;
+      iscalculated = !iscalculated;
     });
 
     switch (imc) {
@@ -113,29 +118,49 @@ abstract class HomeViewModel extends State<Home> {
         secundary = EnumStateimac.obesidademorb.secundary;
     }
 
-    _waringimc(imc);
     Future.delayed(const Duration(seconds: 1)).then((value) {
+      _waringimc(imc);
       setState(() {
         resulImc = imc.toStringAsFixed(1);
         stateImc = state;
         imcprimaryColor = primary;
         imcsecundaryColor = secundary;
-        iscalculated = !iscalculated;
         stateload = Satecalc.finishin;
       });
       ;
     });
   }
 
-  
-
   calcimc() {
     if (width.text != "" && heith.text != "") {
-      
       setStateImc(
           width: double.parse(width.text), heith: double.parse(heith.text));
-    } else {
+    } else {}
+  }
 
+  savetocalc() {
+    if (age.text != '' && gender != '') {
+      saveHistoric(
+          name: name.text,
+          age: double.parse(age.text),
+          width: double.parse(width.text),
+          heith: double.parse(heith.text),
+          imc: double.parse(resulImc),
+          statusimc: stateImc);
+    } else {
+      print("Erro");
     }
+  }
+
+  saveHistoric(
+      {required String name,
+      required double age,
+      required double width,
+      required double heith,
+      required double imc,
+      required String statusimc}) async {
+    HiveRepository repositorie = await HiveRepository.loadrepository();
+
+    repositorie.savehistoric(HistoricModel(name: name, date: DateTime.now(), statusimc: statusimc, age: age, width: width, heith: heith, imc: imc));
   }
 }

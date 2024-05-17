@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class TougleGenderWidget extends StatefulWidget {
-  const TougleGenderWidget({super.key, required this.togleSelect, required this.icons, required this.primary, required this.secundary});
+  const TougleGenderWidget({super.key, required this.togleSelect, required this.icons, required this.primary, required this.secundary, required this.ontap});
   final List<bool> togleSelect;
   final List<Widget> icons;
   final Color primary;
   final Color secundary;
+  final Function({required String gendertype}) ontap;
 
   @override
   State<TougleGenderWidget> createState() => _TougleGenderWidgetState();
@@ -22,6 +23,7 @@ class _TougleGenderWidgetState extends State<TougleGenderWidget> {
             widget.togleSelect[i] = (i == index);
           });
         }
+       widget.ontap(gendertype: index==0?"MALE":"FEMALE");
       },
       direction: Axis.horizontal,
       isSelected: widget.togleSelect,

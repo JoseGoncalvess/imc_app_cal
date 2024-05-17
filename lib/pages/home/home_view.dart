@@ -1,16 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:imc_app_cal/components/age_imput_widget.dart';
 import 'package:imc_app_cal/components/card_info_imc.dart';
 import 'package:imc_app_cal/components/custom_butoom.dart';
 import 'package:imc_app_cal/components/state_imc_model_widget.dart';
 import 'package:imc_app_cal/components/tougle_gender_widget.dart';
-import 'package:imc_app_cal/pages/home_view_model.dart';
+import 'package:imc_app_cal/pages/home/home_view_model.dart';
 import '../../components/drop_measures_widget.dart';
 import '../../src/enum_measures.dart';
 import '../../src/enum_state_calc.dart';
 import '../../src/enum_state_imc.dart';
+import '../historic calc/historic_calc.dart';
 
 class HomeView extends HomeViewModel {
   @override
@@ -49,7 +48,13 @@ class HomeView extends HomeViewModel {
                             ),
                             IconButton(
                                 onPressed: () {
-                                  reflashState();
+                                  iscalculated
+                                      ? reflashState()
+                                      : Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const HistoricCalc()));
                                 },
                                 icon: Icon(
                                   resulImc != ""
@@ -86,6 +91,9 @@ class HomeView extends HomeViewModel {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             TougleGenderWidget(
+                              ontap: ({required gendertype}) => setState(() {
+                                gender = gendertype;
+                              }),
                               primary: imcprimaryColor,
                               secundary: imcsecundaryColor,
                               icons: gendertype,
@@ -105,7 +113,7 @@ class HomeView extends HomeViewModel {
                 curve: Curves.fastOutSlowIn,
                 child: iscalculated
                     ? FutureBuilder(
-                        future: Future.delayed(Duration(microseconds: 1)),
+                        future: Future.delayed(const Duration(microseconds: 2)),
                         builder: (context, _) {
                           switch (stateload) {
                             case Satecalc.await:
@@ -157,9 +165,20 @@ class HomeView extends HomeViewModel {
                     : SizedBox(height: MediaQuery.sizeOf(context).height * 0.4),
               ),
               CustomButoom(
-                actiontext:iscalculated?"Salvar Calculo" :"Cálcular IMC",
+                  actiontext: iscalculated ? "Salvar Calculo" : "Cálcular IMC",
                   ontap: () {
-                    iscalculated ? () {} : calcimc();
+                    saveHistoric(
+                        name: "Bruno",
+                        age: 22.0,
+                        width: 84,
+                        heith: 190,
+                        imc: 25.8,
+                        statusimc: "Normal");
+                    // if (iscalculated) {
+                    //   savetocalc();
+                    // } else {
+                    //   calcimc();
+                    // }
                   },
                   backgroundColor: imcprimaryColor)
             ],

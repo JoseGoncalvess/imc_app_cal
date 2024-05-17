@@ -9,7 +9,7 @@ class CustomButoom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
       height: MediaQuery.of(context).size.height * 0.08,
       child: Padding(
@@ -25,7 +25,7 @@ class CustomButoom extends StatelessWidget {
             child:  Text(
              actiontext,
               style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             )),
       ),
     );
