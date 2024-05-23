@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:imc_app_cal/components/custom_historic_select.dart';
 import 'package:imc_app_cal/helpers/month_name.dart';
 
 import '../models/historic_model.dart';
 
 class CustomHistoricList extends StatefulWidget {
-  const CustomHistoricList({super.key, required this.list, required this.ontap,});
- final  List<HistoricModel> list;
- final Function(HistoricModel historic) ontap;
+  const CustomHistoricList({
+    super.key,
+    required this.list,
+    required this.ontap,
+    required this.isvisible,
+  });
+  final List<HistoricModel> list;
+  final Function(HistoricModel historic, bool isSelect) ontap;
+  final bool isvisible;
 
   @override
   State<CustomHistoricList> createState() => _CustomHistoricListState();
@@ -22,7 +30,10 @@ class _CustomHistoricListState extends State<CustomHistoricList> {
         child: Container(
           height: MediaQuery.sizeOf(context).height * 0.15,
           decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [widget.list[index].primarycolorsstate, widget.list[index].secundarycolorsstate]),
+              gradient: LinearGradient(colors: [
+                widget.list[index].primarycolorsstate,
+                widget.list[index].secundarycolorsstate
+              ]),
               borderRadius: BorderRadius.circular(15),
               boxShadow: const [
                 BoxShadow(color: Colors.grey, blurRadius: 2, spreadRadius: 1)
@@ -30,7 +41,7 @@ class _CustomHistoricListState extends State<CustomHistoricList> {
           child: Row(
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.34,
+                width: MediaQuery.of(context).size.width * 0.36,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -43,17 +54,17 @@ class _CustomHistoricListState extends State<CustomHistoricList> {
                           color: Colors.white),
                     ),
                     Text(
-                     widget.list[index].statusimc,
+                      widget.list[index].statusimc,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
                           color: Colors.white),
                     ),
                   ],
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.48,
+                width: MediaQuery.of(context).size.width * 0.46,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -65,8 +76,8 @@ class _CustomHistoricListState extends State<CustomHistoricList> {
                           fontSize: MediaQuery.of(context).size.width * 0.04,
                           color: Colors.white),
                     ),
-                    Text(MonthName().fomaterData(widget.list[index].date),
-                     
+                    Text(
+                      MonthName().fomaterData(widget.list[index].date),
                       style: TextStyle(
                           fontWeight: FontWeight.w200,
                           fontSize: MediaQuery.of(context).size.width * 0.05,
@@ -75,13 +86,12 @@ class _CustomHistoricListState extends State<CustomHistoricList> {
                   ],
                 ),
               ),
-              IconButton(
-                  onPressed: () {
-                    widget.ontap(widget.list[index]);
-                  },
-                  icon: const Icon(
-                    Icons.edit_document,
-                    color: Colors.white,
+              Visibility(
+                  visible: widget.isvisible,
+                  child: CustomHistoricSelect(
+                    ontap: ({required select}) {
+                      widget.ontap(widget.list[index], select);
+                    },
                   ))
             ],
           ),

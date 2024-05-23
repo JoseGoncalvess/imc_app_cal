@@ -48,7 +48,7 @@ class _CustomBotooshetState extends State<CustomBotooshet> {
                 style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.05,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    color: widget.textcolor),
                 maxLines: 1,
                 decoration: const InputDecoration(border: InputBorder.none),
                 textAlign: TextAlign.center,
