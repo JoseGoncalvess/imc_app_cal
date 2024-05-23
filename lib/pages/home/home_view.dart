@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:imc_app_cal/components/age_imput_widget.dart';
 import 'package:imc_app_cal/components/card_info_imc.dart';
 import 'package:imc_app_cal/components/custom_butoom.dart';
 import 'package:imc_app_cal/components/state_imc_model_widget.dart';
 import 'package:imc_app_cal/components/tougle_gender_widget.dart';
 import 'package:imc_app_cal/pages/home/home_view_model.dart';
+import 'package:imc_app_cal/src/enum_gendertype.dart';
 import '../../components/custom_botooshet.dart';
 import '../../components/drop_measures_widget.dart';
 import '../../src/enum_measures.dart';
@@ -95,12 +93,15 @@ class HomeView extends HomeViewModel {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             TougleGenderWidget(
+                              activit: (width.text != "" && heith.text != ""),
                               ontap: ({required gendertype}) => setState(() {
                                 gender = gendertype;
                               }),
                               primary: imcprimaryColor,
                               secundary: imcsecundaryColor,
-                              icons: gendertype,
+                              icons: EnumGendertype.values
+                                  .map((e) => e.gendericon)
+                                  .toList(),
                               togleSelect: togleSelect,
                             ),
                             AgeImputWidget(
@@ -179,11 +180,8 @@ class HomeView extends HomeViewModel {
                           builder: (context) => CustomBotooshet(
                               textcolor: imcprimaryColor,
                               controller: name,
-                              ontap: () => savetocalc()
-                                  .then((value) => {
-                                    reflashState(),
-                                    Navigator.pop(context)
-                                  })));
+                              ontap: () => savetocalc().then((value) =>
+                                  {reflashState(), Navigator.pop(context)})));
                     } else {
                       calcimc();
                     }

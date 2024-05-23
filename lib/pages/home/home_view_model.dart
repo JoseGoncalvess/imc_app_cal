@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:imc_app_cal/pages/home/home.dart';
 import '../../models/historic_model.dart';
 import '../../services/repository/hive_repository.dart';
+import '../../src/enum_gendertype.dart';
 import '../../src/enum_state_calc.dart';
 import '../../src/enum_state_imc.dart';
 
 abstract class HomeViewModel extends State<Home> {
   List<bool> togleSelect = [true, false];
-
-  List<Widget> gendertype = [
-    const Icon(Icons.man_2_rounded),
-    const Icon(Icons.woman_2_rounded)
-  ];
-
   bool iscalculated = false;
   Satecalc stateload = Satecalc.await;
 
@@ -22,7 +17,7 @@ abstract class HomeViewModel extends State<Home> {
   final age = TextEditingController();
   final heith = TextEditingController();
   final width = TextEditingController();
-  String gender = '';
+  String gender = EnumGendertype.man.name;
   String stateImc = "";
   String resulImc = "";
   String noticelImc = "";

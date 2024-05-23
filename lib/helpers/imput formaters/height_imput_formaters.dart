@@ -1,7 +1,4 @@
-
 import 'package:flutter/services.dart';
-
-class ImputFormaters {}
 
 class HeightImputFormatersextends extends TextInputFormatter {
   @override
