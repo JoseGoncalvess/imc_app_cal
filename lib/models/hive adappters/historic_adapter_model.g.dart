@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'historic_model.dart';
+part of '../historic_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -15,19 +15,18 @@ class HistoricModelAdapter extends TypeAdapter<HistoricModel> {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    }; 
-    
+    };
     return HistoricModel(
-      name: fields[0] as String,
-      date: fields[1] as DateTime,
-      statusimc: fields[2] as String,
-      age: fields[3] as double,
-      width: fields[4] as double,
-      heith: fields[5] as double,
-      imc: fields[6] as double,
-      primarycolorsstate:  Color(reader.readUint32()),
-      secundarycolorsstate: Color(reader.readUint32()),
-    );
+      name: fields[0] ?? '',
+      date: fields[1] ?? DateTime.now(),
+      statusimc: fields[2] ??'',
+      age: fields[3] ??0,
+      width: fields[4] ??0,
+      heith: fields[5] ??0,
+      imc: fields[6] ??0,
+      primarycolorsstate: fields[7] as Color,
+      secundarycolorsstate: fields[8] as Color,
+    ); 
   }
 
   @override
@@ -48,10 +47,10 @@ class HistoricModelAdapter extends TypeAdapter<HistoricModel> {
       ..write(obj.heith)
       ..writeByte(6)
       ..write(obj.imc)
-      ..writeUint32(7)
-      ..writeUint32(obj.primarycolorsstate.value)
-      ..writeUint32(8)
-      ..writeUint32(obj.secundarycolorsstate.value);
+      ..writeByte(7)
+      ..write(obj.primarycolorsstate)
+      ..writeByte(8)
+      ..write(obj.secundarycolorsstate);
   }
 
   @override
