@@ -1,8 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-part 'historic_model.g.dart';
+part 'hive adappters/historic_adapter_model.g.dart';
 
 @HiveType(typeId: 0)
 class HistoricModel extends HiveObject {
