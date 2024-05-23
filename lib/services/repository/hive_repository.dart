@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:imc_app_cal/models/historic_model.dart';
 
 class HiveRepository {
