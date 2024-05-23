@@ -8,6 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HiveStructure().initDirectory();
    Hive.registerAdapter(HistoricModelAdapter());
+   Hive.registerAdapter(ColorAdapter());
   await Hive.openBox('HiveHistoricCalc');
 
   runApp(const MyApp());
