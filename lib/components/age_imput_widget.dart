@@ -21,7 +21,8 @@ class _AgeImputWidgetState extends State<AgeImputWidget> {
           color: widget.secundarycolor,
           borderRadius: BorderRadius.all(Radius.circular(20))),
       child: TextField(
-        inputFormatters: [LengthLimitingTextInputFormatter(3)],
+        inputFormatters: [LengthLimitingTextInputFormatter(3),
+        ],
         onChanged: (value) {
           setState(() {
             widget.controller.text = value;

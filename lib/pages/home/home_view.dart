@@ -180,7 +180,10 @@ class HomeView extends HomeViewModel {
                               textcolor: imcprimaryColor,
                               controller: name,
                               ontap: () => savetocalc()
-                                  .then((value) => Navigator.pop(context))));
+                                  .then((value) => {
+                                    reflashState(),
+                                    Navigator.pop(context)
+                                  })));
                     } else {
                       calcimc();
                     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:imc_app_cal/helpers/imput%20formaters/height_imput_formaters.dart';
 
 class DropMeasuresWidget extends StatefulWidget {
   final List<String> measures;
@@ -41,7 +42,7 @@ class _DropMeasuresWidgetState extends State<DropMeasuresWidget> {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 3.0),
               child: TextField(
-                inputFormatters: [LengthLimitingTextInputFormatter(4)],
+                inputFormatters: [LengthLimitingTextInputFormatter(4),HeightImputFormatersextends()],
                 controller: widget.controller,
                 style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.05,
