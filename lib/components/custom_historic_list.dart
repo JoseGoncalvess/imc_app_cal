@@ -23,9 +23,11 @@ class CustomHistoricList extends StatefulWidget {
 class _CustomHistoricListState extends State<CustomHistoricList> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return widget.list.isEmpty?Center(
+        child: Text("Sem Resultados Salvos...", style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold, fontSize: MediaQuery.of(context).size.width* 0.05),),
+      ): ListView.builder(
       itemCount: widget.list.length,
-      itemBuilder: (context, index) => Padding(
+      itemBuilder: (context, index) =>  Padding(
         padding: const EdgeInsets.all(10),
         child: Container(
           height: MediaQuery.sizeOf(context).height * 0.15,

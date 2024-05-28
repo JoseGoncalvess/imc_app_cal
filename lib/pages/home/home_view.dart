@@ -171,7 +171,7 @@ class HomeView extends HomeViewModel {
               ),
               CustomButoom(
                   textColor: Colors.white,
-                  actiontext: iscalculated ? "Salvar Calculo" : "Cálcular IMC",
+                  actiontext: iscalculated ? "Salvar Resultado" : "Cálcular IMC",
                   ontap: () {
                     if (iscalculated) {
                       showModalBottomSheet(

@@ -12,7 +12,8 @@ class HistoricCalcView extends HistoricCalcViewModel {
         backgroundColor: Theme.of(context).primaryColor,
         iconTheme: const IconThemeData(color: Colors.white),
         actions: [
-          IconButton(
+          isempyt?
+          const SizedBox():IconButton(
               onPressed: () => setState(() {
                     visibility = !visibility;
                   }),
@@ -42,7 +43,7 @@ class HistoricCalcView extends HistoricCalcViewModel {
           color: Colors.white,
         ),
         onPressed: () {
-          showDialog(
+         isempyt?(){}: showDialog(
             context: context,
             builder: (context) => HistoricAlertDialog(ontap:() => deletmuchhistoric(historictemp) ),
           );

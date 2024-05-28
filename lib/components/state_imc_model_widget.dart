@@ -15,7 +15,7 @@ class StateImcModelWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
       curve: Curves.decelerate,
       opacity: isselect?1:0.2,
       child: Row(

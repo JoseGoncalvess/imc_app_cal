@@ -19,7 +19,7 @@ class _AgeImputWidgetState extends State<AgeImputWidget> {
       width: MediaQuery.sizeOf(context).width * 0.4,
       decoration:  BoxDecoration(
           color: widget.secundarycolor,
-          borderRadius: BorderRadius.all(Radius.circular(20))),
+          borderRadius: const BorderRadius.all(const Radius.circular(20))),
       child: TextField(
         inputFormatters: [LengthLimitingTextInputFormatter(3),
         ],

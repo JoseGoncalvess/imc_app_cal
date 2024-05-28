@@ -8,6 +8,15 @@ abstract class HistoricCalcViewModel extends State<HistoricCalc> {
   List<HistoricModel> historictemp = [];
 
   bool visibility = false;
+  bool isempyt = true;
+
+@override
+  void initState() {
+    super.initState();
+    loadhistoric().then((value) =>  isempyt = historic.isEmpty);
+     
+  }
+
 
   Future loadhistoric() async {
     HiveRepository repositorie = await HiveRepository.loadrepository();
@@ -29,9 +38,5 @@ abstract class HistoricCalcViewModel extends State<HistoricCalc> {
     loadhistoric();
   }
 
-  @override
-  void initState() {
-    super.initState();
-    loadhistoric();
-  }
+
 }

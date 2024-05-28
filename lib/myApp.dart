@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       title: "App IMC",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFE3B838)),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFFACB3E), primary: const Color(0xFFFACB3E)),
           useMaterial3: true),
       home: const Splash(),
     );
