@@ -1,8 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:imc_app_cal/pages/home/home.dart';
 import '../../models/historic_model.dart';
 import '../../services/repository/hive_repository.dart';
 import '../../src/enum_gendertype.dart';
+import '../../src/enum_measures.dart';
 import '../../src/enum_state_calc.dart';
 import '../../src/enum_state_imc.dart';
 
@@ -11,8 +13,8 @@ abstract class HomeViewModel extends State<Home> {
   bool iscalculated = false;
   Satecalc stateload = Satecalc.await;
 
-  Color imcprimaryColor = Colors.deepPurple;
-  Color imcsecundaryColor = Colors.deepPurple.shade400;
+  Color imcprimaryColor = Color(0xFFFACB3E);
+  Color imcsecundaryColor = Color(0xFFF8D56C);
   final name = TextEditingController();
   final age = TextEditingController();
   final heith = TextEditingController();
@@ -30,8 +32,8 @@ abstract class HomeViewModel extends State<Home> {
       noticelImc = "";
       diflImc = "";
       gender = "";
-      imcprimaryColor = Colors.deepPurple;
-      imcsecundaryColor = Colors.deepPurple.shade400;
+      imcprimaryColor = const Color(0xFFE3B838);
+      imcsecundaryColor = const Color(0xFFDBBC5F);
       stateload = Satecalc.await;
     });
     name.clear();
@@ -41,6 +43,15 @@ abstract class HomeViewModel extends State<Home> {
 
     iscalculated = !iscalculated;
   }
+
+  heithconvert(Measuresheight measure){
+      if (measure == Measuresheight.cm) {
+          heith.text = (double.parse(heith.text)/ 100).toString();
+      }
+
+  }
+
+
 
   double _calcImc({required double width, required double heith}) {
     return width / (heith * heith);
