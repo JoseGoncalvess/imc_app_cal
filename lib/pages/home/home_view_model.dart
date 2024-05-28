@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:imc_app_cal/pages/home/home.dart';
@@ -44,14 +45,23 @@ abstract class HomeViewModel extends State<Home> {
     iscalculated = !iscalculated;
   }
 
-  heithconvert(Measuresheight measure){
-      if (measure == Measuresheight.cm) {
-          heith.text = (double.parse(heith.text)/ 100).toString();
-      }
-
+  heithconvert(String measure) {
+    if (measure == Measuresheight.cm.name && !width.text.contains("0.0")) {
+      heith.text = (double.parse(heith.text) / 100).toStringAsFixed(4);
+    } else if (measure == Measuresheight.m.name && heith.text.contains("0.0")) {
+      heith.text = (double.parse(heith.text) * 100).toString();
+    }
   }
 
+  widthconvert(String measure) {
+    if (measure == Measureswidth.g.name &&  !width.text.contains("0.0")) {
 
+      log((double.parse(width.text) / 1000).toString());
+      width.text = (double.parse(width.text) / 1000).toStringAsFixed(4);
+    } else if (measure == Measureswidth.kg.name && width.text.contains("0.0")) {
+      width.text = (double.parse(width.text) * 1000).toString();
+    }
+  }
 
   double _calcImc({required double width, required double heith}) {
     return width / (heith * heith);

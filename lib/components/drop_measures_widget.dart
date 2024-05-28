@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:imc_app_cal/helpers/imput%20formaters/height_imput_formaters.dart';
 
+import '../helpers/imput formaters/width_imput_formaters.dart';
+
 class DropMeasuresWidget extends StatefulWidget {
   final List<String> measures;
   final TextEditingController controller;
   final Color colortype;
+  final Function({required String measure}) convertmeasure;
   const DropMeasuresWidget(
       {super.key,
       required this.measures,
       required this.controller,
-      required this.colortype});
+      required this.colortype, required this.convertmeasure});
 
   @override
   State<DropMeasuresWidget> createState() => _DropMeasuresWidgetState();
@@ -18,6 +21,8 @@ class DropMeasuresWidget extends StatefulWidget {
 
 class _DropMeasuresWidgetState extends State<DropMeasuresWidget> {
   late String dropDowValue;
+  final List<TextInputFormatter> imputWidth =[LengthLimitingTextInputFormatter(4),WidthImputFormaters()];
+  final List<TextInputFormatter> imputheight =[LengthLimitingTextInputFormatter(4),HeightImputFormatersextends()];
   @override
   void initState() {
     super.initState();
@@ -42,8 +47,9 @@ class _DropMeasuresWidgetState extends State<DropMeasuresWidget> {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 3.0),
               child: TextField(
-                inputFormatters: [LengthLimitingTextInputFormatter(4),HeightImputFormatersextends()],
+                inputFormatters: widget.measures.contains("M")?imputheight:imputWidth, 
                 controller: widget.controller,
+                
                 style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.05,
                     fontWeight: FontWeight.bold,
@@ -73,8 +79,9 @@ class _DropMeasuresWidgetState extends State<DropMeasuresWidget> {
                         ))
                 .toList(),
             onChanged: (value) {
+              widget.convertmeasure(measure:value!);
               setState(() {
-                dropDowValue = value!;
+                dropDowValue = value;
               });
             },
           )

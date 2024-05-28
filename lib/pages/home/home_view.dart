@@ -73,6 +73,7 @@ class HomeView extends HomeViewModel {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             DropMeasuresWidget(
+                              convertmeasure: ({required measure}) => heithconvert(measure),
                               colortype: imcsecundaryColor,
                               measures: Measuresheight.values
                                   .map((e) => e.name)
@@ -80,6 +81,7 @@ class HomeView extends HomeViewModel {
                               controller: heith,
                             ),
                             DropMeasuresWidget(
+                              convertmeasure:({required measure}) => widthconvert(measure),
                               colortype: imcsecundaryColor,
                               measures: Measureswidth.values
                                   .map((e) => e.name)
