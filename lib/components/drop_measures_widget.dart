@@ -21,7 +21,7 @@ class DropMeasuresWidget extends StatefulWidget {
 
 class _DropMeasuresWidgetState extends State<DropMeasuresWidget> {
   late String dropDowValue;
-  final List<TextInputFormatter> imputWidth =[LengthLimitingTextInputFormatter(4),WidthImputFormaters()];
+  final List<TextInputFormatter> imputWidth =[LengthLimitingTextInputFormatter(5),WidthImputFormaters()];
   final List<TextInputFormatter> imputheight =[LengthLimitingTextInputFormatter(4),HeightImputFormatersextends()];
   @override
   void initState() {
@@ -32,8 +32,9 @@ class _DropMeasuresWidgetState extends State<DropMeasuresWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       height: MediaQuery.sizeOf(context).height * 0.06,
-      width: MediaQuery.sizeOf(context).width * 0.4,
+      width: MediaQuery.sizeOf(context).width * 0.45,
       decoration: BoxDecoration(
           color: widget.colortype,
           borderRadius: const BorderRadius.all(Radius.circular(20))),

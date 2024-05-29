@@ -43,11 +43,11 @@ class HistoricCalcView extends HistoricCalcViewModel {
           color: Colors.white,
         ),
         onPressed: () {
-         isempyt?(){}: showDialog(
+         (isempyt|| !visibility)?(){}: showDialog(
             context: context,
             builder: (context) => HistoricAlertDialog(ontap:() => deletmuchhistoric(historictemp) ),
           );
-          ;
+          
         },
       ),
     );

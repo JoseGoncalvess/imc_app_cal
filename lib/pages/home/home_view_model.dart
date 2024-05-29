@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:imc_app_cal/pages/home/home.dart';
 import '../../models/historic_model.dart';
@@ -14,8 +12,8 @@ abstract class HomeViewModel extends State<Home> {
   bool iscalculated = false;
   Satecalc stateload = Satecalc.await;
 
-  Color imcprimaryColor = Color(0xFFFACB3E);
-  Color imcsecundaryColor = Color(0xFFF8D56C);
+  Color imcprimaryColor = const Color(0xFFFACB3E);
+  Color imcsecundaryColor = const Color(0xFFF8D56C);
   final name = TextEditingController();
   final age = TextEditingController();
   final heith = TextEditingController();
@@ -54,10 +52,8 @@ abstract class HomeViewModel extends State<Home> {
   }
 
   widthconvert(String measure) {
-    if (measure == Measureswidth.g.name &&  !width.text.contains("0.0")) {
-
-      log((double.parse(width.text) / 1000).toString());
-      width.text = (double.parse(width.text) / 1000).toStringAsFixed(4);
+    if (measure == Measureswidth.g.name && !width.text.contains("0.0")) {
+      width.text = (double.parse(width.text) / 1000).toStringAsFixed(5);
     } else if (measure == Measureswidth.kg.name && width.text.contains("0.0")) {
       width.text = (double.parse(width.text) * 1000).toString();
     }
@@ -91,7 +87,10 @@ abstract class HomeViewModel extends State<Home> {
   }
 
   void setStateImc({required double width, required double heith}) {
-    double imc = width / (heith * heith);
+    width = validationwidth(width.toString());
+    heith = validationheith(heith.toString());
+
+    double imc = _calcImc(width: width, heith: heith);
     String state = '';
     Color primary = Colors.deepPurple;
     Color secundary = Colors.deepPurple.shade400;
@@ -148,7 +147,10 @@ abstract class HomeViewModel extends State<Home> {
     if (width.text != "" && heith.text != "") {
       setStateImc(
           width: double.parse(width.text), heith: double.parse(heith.text));
-    } else {}
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: const Text("Verifique as infomrações que faltam!"),action: SnackBarAction(label: "OK", onPressed: () {},),));
+    }
   }
 
   Future savetocalc() async {
@@ -188,5 +190,25 @@ abstract class HomeViewModel extends State<Home> {
         imc: imc,
         primarycolorsstate: primary,
         secundarycolorsstate: secundary));
+  }
+
+  double validationwidth(String width) {
+    double newValue = 0;
+    if (width.contains("0.")) {
+      newValue = (double.parse(width) * 1000);
+    } else {
+      newValue = double.parse(width);
+    }
+    return newValue;
+  }
+
+  double validationheith(String heith) {
+    double newValue = 0;
+    if (heith.contains("0.")) {
+      newValue = (double.parse(heith) * 100);
+    } else {
+      newValue = double.parse(heith);
+    }
+    return newValue;
   }
 }

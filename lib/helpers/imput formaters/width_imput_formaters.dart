@@ -9,9 +9,9 @@ class WidthImputFormaters extends TextInputFormatter {
 
     if (newValue.text.contains(',')) {
       textajust = newValue.text.replaceFirst(',', '.');
-    } else if (newValue.text.length == 3 && !newValue.text.contains('.')) {
+    }else if (newValue.text.length == 5 && !newValue.text.contains('.')) {
       List<String> chars = newValue.text.split('');
-      textajust = "${chars[0]}${chars[1]}.${chars[2]}";
+      textajust = "${chars[0]}${chars[1]}${chars[2]}.${chars[3]}";
     }
 
     return TextEditingValue(text: textajust, selection: selection);

@@ -35,6 +35,9 @@ abstract class HistoricCalcViewModel extends State<HistoricCalc> {
     for (var historic in collection) {
       delethistori(historic);
     }
+    setState(() {
+      visibility = !visibility;
+    });
     loadhistoric();
   }
 
