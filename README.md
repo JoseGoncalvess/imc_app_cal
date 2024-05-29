@@ -14,11 +14,12 @@ Aplicativo completo a o que se remete a fazer com a possibilidade de perssistir 
 
 ## Preview
 <div   width: 100%; height: 280px; display: inline;>
-<img src="./assets/home-page.jpeg" height='250'/>
-<img src="./assets/home-calc.jpeg" height='250'/>
-<img src="./assets/home-calc2.jpeg" height='250'/>
-<img src="./assets/save-calc.jpeg" height='250'/>
-<img src="./assets/delet-calc.jpeg" height='250'/>
+<img src="assets/screenshots/home-page.jpeg" height='250'/>
+<img src="assets/screenshots/home-calc.jpeg" height='250'/>
+<img src="assets/screenshots/home-calc-2.jpeg" height='250'/>
+<img src="assets/screenshots/save-calc.jpeg" height='250'/>
+<img src="assets/screenshots/delet-calc.jpeg" height='250'/>
+<img src="assets/screenshots/historic-page.jpeg" height='250'/>
 </div>
 
 
