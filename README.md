@@ -1,11 +1,8 @@
 
 # CALCULADORA IMC
-![Logo](..\assets\Logo.png)
+<img src="https://raw.githubusercontent.com/JoseGoncalvess/imc_app_cal/main/assets/Logo.png" width="200" height="200" />
 
 Calculadora simples e interativa com foco em mostra o condicionamento atual do seu corpo, designer e funcionalidades intuitiva podendo salvar suas consultas e consultas posteriormente. Simples e prático como tem que ser!
-
-
-
 
 ## Objetivo do App:
 Facilitar o cálculo do IMC/IBM corporal por meio de uma interface simples, asim como sua estrutura pautada do modelo de arqeuitetura MVVM, limitandose apenas aos [packages](https://pub.dev/) necessários a suas atuações.
@@ -16,9 +13,13 @@ Aplicativo completo a o que se remete a fazer com a possibilidade de perssistir 
 
 
 ## Preview
-![App Screenshot](C:\Users\conta\Downloads\coisas\imc_app_cal\assets\Logo.png)
-![App Screenshot](C:\Users\conta\Downloads\coisas\imc_app_cal\assets\Logo.png)
-![App Screenshot](C:\Users\conta\Downloads\coisas\imc_app_cal\assets\Logo.png)
+<div   width: 100%; height: 280px; display: inline;>
+<img src="./assets/home-page.jpeg" height='250'/>
+<img src="./assets/home-calc.jpeg" height='250'/>
+<img src="./assets/home-calc2.jpeg" height='250'/>
+<img src="./assets/save-calc.jpeg" height='250'/>
+<img src="./assets/delet-calc.jpeg" height='250'/>
+</div>
 
 
 ## Stack utilizada
